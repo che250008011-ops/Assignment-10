@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Marks {
+    float math, science, english;
+};
+
+struct Student {
+    int rollNo;
+    string name;
+    Marks marks;
+};
+
+int main() {
+    Student students[5];
+    float avg[5];
+    int highest = 0, lowest = 0;
+
+    for (int i = 0; i < 5; i++) {
+        cout << "\nEnter details for student " << i + 1 << ":\n";
+        cout << "Roll No: ";
+        cin >> students[i].rollNo;
+        cin.ignore(); 
+        cout << "Name: ";
+        getline(cin, students[i].name);
+
+        cout << "Enter marks in Math, Science, and English: ";
+        cin >> students[i].marks.math >> students[i].marks.science >> students[i].marks.english;
+
+        avg[i] = (students[i].marks.math + students[i].marks.science + students[i].marks.english) / 3.0;
+
+        if (avg[i] > avg[highest]) highest = i;
+        if (avg[i] < avg[lowest]) lowest = i;
+    }
+
+    cout << "\n--- Student with Highest Average ---\n";
+    cout << "Name: " << students[highest].name << endl;
+    cout << "Roll No: " << students[highest].rollNo << endl;
+    cout << "Average Marks: " << avg[highest] << endl;
+
+    cout << "\n--- Student with Lowest Average ---\n";
+    cout << "Name: " << students[lowest].name << endl;
+    cout << "Roll No: " << students[lowest].rollNo << endl;
+    cout << "Average Marks: " << avg[lowest] << endl;
+
+    return 0;
+}
+
