@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Employee {
+    int id;
+    string name;
+    float salary;
+};
+
+int main() {
+    Employee emp[10];
+    int choice;
+    cout << "Enter details for 10 employees:\n";
+    for (int i = 0; i < 10; i++) {
+        cout << "\nEmployee " << i + 1 << " ID: ";
+        cin >> emp[i].id;
+        cout << "Name: ";
+        cin.ignore();  
+        getline(cin, emp[i].name);
+        cout << "Salary: ";
+        cin >> emp[i].salary;
+    }
+
+    
+    do {
+        cout << "\n--- Menu ---\n";
+        cout << "1. Display all employees\n";
+        cout << "2. Search employee by ID\n";
+        cout << "3. Increase salary (<30000) by 10%\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            cout << "\nEmployee Details:\n";
+            for (int i = 0; i < 10; i++) {
+                cout << "ID: " << emp[i].id
+                     << ", Name: " << emp[i].name
+                     << ", Salary: " << emp[i].salary << endl;
+            }
+        } 
+        else if (choice == 2) {
+            int id, found = 0;
+            cout << "Enter ID to search: ";
+            cin >> id;
+            for (int i = 0; i < 10; i++) {
+                if (emp[i].id == id) {
+                    cout << "ID: " << emp[i].id
+                         << ", Name: " << emp[i].name
+                         << ", Salary: " << emp[i].salary << endl;
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found)
+                cout << "Employee not found!\n";
+        } 
+        else if (choice == 3) {
+            for (int i = 0; i < 10; i++) {
+                if (emp[i].salary < 30000)
+                    emp[i].salary *= 1.10;
+            }
+            cout << "Salaries updated successfully!\n";
+        } 
+        else if (choice == 4) {
+            cout << "Exiting program...\n";
+        } 
+        else {
+            cout << "Invalid choice! Try again.\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
+
+
+
+
